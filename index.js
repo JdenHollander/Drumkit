@@ -7,11 +7,14 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
     //this.style.color="blue";
     var buttonInnerHTML = this.innerHTML;
     makeSound(buttonInnerHTML);
+    buttonAnimation(buttonInnerHTML);
   });
 }
 //Dececting Keyboard Press
-  document.addEventListener("keydown", function(event) {
+//keypress and keydown are the same commands
+  document.addEventListener("keypress", function(event) {
     makeSound(event.key);
+    buttonAnimation(event.key);
   });
 
   function makeSound(key){
@@ -48,4 +51,13 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
       default: console.log(buttonInnerHTML);
 
     }
+  }
+
+  function buttonAnimation(currentKey){
+    var activeButton = document.querySelector("."+currentKey);
+    activeButton.classList.add("pressed");
+
+    setTimeout(function(){
+      activeButton.classList.remove("pressed");
+    },100);
   }
